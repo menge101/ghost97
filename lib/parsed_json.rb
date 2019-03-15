@@ -5,9 +5,9 @@
 # you would just have a nested hash stored
 class ParsedJson
   # Initilizes a ParsedJson Object
-  # @params [Hash] kwargs Takes an arbitrary hash an parses with the assumption that each key represents a Team
-  def initialize(**kwargs)
-    kwargs.each do |name, value|
+  # @params [Hash] data Takes an arbitrary hash an parses with the assumption that each key represents a Team
+  def initialize(data)
+    data.each do |name, value|
       instance_variable_set(normalize_key(name), value)
       self.class.attr_accessor name.to_sym
     end

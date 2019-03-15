@@ -6,9 +6,9 @@ require_relative 'parsed_json'
 class Team < ParsedJson
   attr_accessor :players
 
-  def initialize(**kwargs)
-    @players = parse_players(kwargs.delete(:players))
-    super(kwargs)
+  def initialize(team_data)
+    @players = parse_players(team_data.delete(:players))
+    super(team_data)
   end
 
   # This method parses the player key, which is assumed to hold a hash of players

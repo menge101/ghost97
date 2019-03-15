@@ -6,8 +6,8 @@ require_relative 'team'
 
 # This class parses the Game hash into Teams
 class Game < ParsedJson
-  def initialize(**kwargs)
-    kwargs.each do |key, value|
+  def initialize(game_data)
+    game_data.each do |key, value|
       instance_variable_set(normalize_key(key), Team.new(value))
       self.class.attr_accessor key.to_sym
     end
