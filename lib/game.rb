@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 require_relative 'parsed_json'
+require_relative 'player'
+require_relative 'team'
 
+# This class parses the Game hash into Teams
 class Game < ParsedJson
   def initialize(**kwargs)
     kwargs.each do |key, value|
@@ -10,22 +13,10 @@ class Game < ParsedJson
     end
   end
 
+  # This method returns players from all Teams
+  # An assumption that all instance variables of objects instantiated of this class will be teams having #players
+  # @return [Array] Returns an array of players
   def all_players
-    @away.players + @home.players
-  end
-end
-
-class Player < ParsedJson; end
-
-class Team < ParsedJson
-  attr_accessor :players
-
-  def initialize(**kwargs)
-    @players = parse_players(kwargs.delete(:players))
-    super(kwargs)
-  end
-
-  def parse_players(players)
-    players.values.map { |player| Player.new(player) }
+    instance_variables.map { |var| instance_variable_get(var) }.reduce([]) { |acc, team| acc + team.players }
   end
 end

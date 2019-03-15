@@ -1,6 +1,7 @@
 require_relative 'game_data'
 require_relative 'lib/game'
 
+# Ghost's initial method
 def big_shoe_rebounds(h)
   #will return the number of rebounds associated with the player that has the largest shoe size
   # STEP1: find the player with the biggest shoe size
